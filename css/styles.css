@@ -1,0 +1,139 @@
+@import url('https://fonts.googleapis.com/css2?family=Biryani:wght@300&family=Edu+TAS+Beginner:wght@700&display=swap');
+
+/* Styles for the entire page */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f7f7f7;
+}
+
+/* Styles for the header section */
+header {
+    background-color: rgb(70, 180, 45);
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+    font-family: 'Edu TAS Beginner', cursive;
+    font-size: 1px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+h1 {
+
+    margin-bottom: 10px;
+}
+
+/* Styles for the main content */
+main {
+    padding: 20px;
+}
+
+h2 {
+    font-size: 24px;
+    color: #333;
+}
+
+h3 {
+    font-size: 20px;
+    color: #666666;
+}
+
+/* Styles for the "Poser votre candidature" link */
+a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: rgb(34, 136, 11);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+a:hover {
+    background-color:rgb(34, 136, 11);
+}
+
+/* Styles for tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+/* Styles for the "Personne dans la base de données..." message */
+h4 {
+    color: #FF0000;
+    margin-top: 20px;
+}
+
+/* Styles for the "Liste des condidats" heading */
+h1 {
+    font-size: 24px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+/* Styles for edit and delete links */
+a.edit-link, a.delete-link {
+    text-decoration: none;
+    color: #068286;
+    margin-right: 10px;
+}
+
+a.edit-link:hover, a.delete-link:hover {
+    text-decoration: underline;
+}
+
+/* Styles for the form */
+form {
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Styles for form labels */
+label {
+    display: block;
+    margin-top: 10px;
+}
+
+/* Styles for form input fields */
+input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+/* Styles for the "Inscription" button */
+button {
+    background-color: rgb(34, 136, 11);
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: rgb(56, 194, 25);
+}
+
+
+a:hover {
+    text-decoration: underline;
+}
