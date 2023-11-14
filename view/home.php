@@ -4,7 +4,13 @@
         <header>
             <div class="container">
                 <h1>Welcome to my TP2  </h1>
-
+        <nav>            
+            <ul>
+                <li><a href="{{path}}">Home</a></li>
+                <li><a href="{{path}}/condidat">Client</a></li>
+                <li><a href="{{path}}/condidat/create">Client Create</a></li>
+            </ul>
+        </nav>
             </div>
         </header>
         <main>
@@ -13,6 +19,8 @@
         <a href="{{path}}/condidat/create">Poser votre candidature</a>
         
         <table >
+        {% if programmes %} 
+
         <tr>
             <th>Nom de programme</th>
             <th>Description</th>
@@ -28,6 +36,8 @@
             </tr>
             {% endfor %}    
 
+
+            {% endif %} 
         </table>
         {%if ( condidats | length == 0 ) or ( condidats | length < 0 ) %}
         

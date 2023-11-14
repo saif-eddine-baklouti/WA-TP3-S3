@@ -10,6 +10,13 @@ RequirePage::model('Programme');
 class ControllerCondidat extends controller {
 
     public function index(){
+        $condidat = new Condidat;
+        $selectC = $condidat->select();
+
+        $programme = new Programme;
+        $selectP = $programme->select();
+        
+        return Twig::render('home.php', ['condidats' => $selectC,'programmes' => $selectP]);
 
     }
 

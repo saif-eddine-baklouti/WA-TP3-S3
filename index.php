@@ -3,7 +3,8 @@
 // ini_set('display_startup_errors', 1);
 // error_reporting(E_ALL);
 
-define('PATH_DIR', 'https://e2395393.webdev.cmaisonneuve.qc.ca/WA-TP2-S3');
+// define('PATH_DIR', 'https://e2395393.webdev.cmaisonneuve.qc.ca/WA-TP3-S3');
+define('PATH_DIR', 'http://localhost/sommatif/WA/WA-TP3-S3');
 require_once('controller/Controller.php');          
 require_once('library/RequirePage.php');
 require_once __DIR__.'/vendor/autoload.php';
