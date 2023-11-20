@@ -21,10 +21,11 @@
 
                 {% if session.privilege == 1 %}
                 <li><a href="{{path}}/user">Users</a></li>
+                <li><a href="{{path}}/journal">board journal</a></li>
                 {% endif %}
                 <li><a href="{{path}}/login/logout">Logout</a></li>
                 {% endif %}
-                <li><a href="{{path}}/journal">board journal</a></li>
+                
                 <h2>{{ session.username }}</h2>     
             </ul>
         </nav>

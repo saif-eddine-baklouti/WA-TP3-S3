@@ -58,9 +58,9 @@ class ControllerLogin extends controller {
         $user = new user;
         $checkUser = $user->checkUser($_POST['username']);
 
-        $phpmailer = new Mail("nomEcole","saif.eddine.baklouti@gmail.com","") ;
+        $phpmailer = new Mail("nomEcole","saif.eddine.baklouti@gmail.com","qdgg wkxb hwzi mchp") ;
 
-        $phpmailer->sendMail($emailPass,"nouveau mot de passe",$checkUser);
+        $phpmailer->sendMail($emailPass, "nouveau mot de passe", $checkUser);
 
         return Twig::render('auth/email.php', [  'user' => $_POST]);
         die();
