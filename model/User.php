@@ -1,5 +1,5 @@
 <?php
-
+    
 class User extends CRUD {
 
     protected $table = 'user';
@@ -15,12 +15,10 @@ class User extends CRUD {
         $count = $stmt->rowCount();
 
         if($count === 1){
-            $salt = "H3@_l?a";
+            $salt = "@Z__9U__8n1_A6Z#@__H";
             $saltPassword = $password.$salt;
-            //echo $saltPassword;
             $info_user = $stmt->fetch();
-           // echo $info_user['password'];
-            
+
             if($password != null){
                 // check password
                 if(password_verify($saltPassword, $info_user['password'])){
@@ -31,7 +29,11 @@ class User extends CRUD {
                     $_SESSION['privilege'] = $info_user['privilege_id'];
                     $_SESSION['fingerPrint'] = md5($_SERVER['HTTP_USER_AGENT'].$_SERVER['REMOTE_ADDR']);
 
-                    RequirePage::url('client');
+                    if ($_SESSION['privilege'] == 1) {
+                        RequirePage::url('/user');
+                        exit();
+                    }
+                    RequirePage::url('/home');
                     exit();
 
                 }else{
@@ -39,30 +41,25 @@ class User extends CRUD {
                     return $errors;
                 }
             }else{
-                //forgot password
-                //print_r( $info_user);
-                //update
+
                 $tempPassword = uniqid();
 
                 $user['id'] = $info_user['id'];
                 $user['tempPassword']=$tempPassword; 
                 $this->update($user);
 
-                // $sql = "UPDATE $this->table SET tempPassword = ? WHERE id = ?";
-                // $stmt = $this->prepare($sql);
-                // $stmt->execute(array($tempPassword,  $info_user['id']));
+                $sql = "UPDATE $this->table SET tempPassword = ? WHERE id = ?";
+                $stmt = $this->prepare($sql);
+                $stmt->execute(array($tempPassword,  $info_user['id']));
 
-                $lien = "<a href='newPassword?user=".$info_user['id']."&temp=$tempPassword'>New pass</a>";
-                //die();
+                $lien = "<p>Cliquez sur le lien suivant <a href='http://localhost/sommatif/WA/WA-TP3-S3/login/newPassword&user=".$info_user['id']."&temp=$tempPassword'>Click ici</a> , comme cela devrait être possible de créer un nouveau mot de passe.</p>";
+                
                 return $lien;
             }
         }else{
             $errors = "<ul><li>Verifier le username</li></ul>";
             return $errors; 
         }
-
-
-
     }
 
     public function checkTempPassword($id, $tempPassword){
@@ -72,7 +69,6 @@ class User extends CRUD {
         $count = $stmt->rowCount();
         return $count;
     }
-    
 }
 
 ?>

@@ -1,7 +1,7 @@
 {{ include('header.php', {title: 'Login'}) }}
 <body>
     <div class="container">
-        <form action="{{path}}login/newPasswordUpdate" method="post">
+        <form action="{{path}}/login/newPasswordUpdate" method="post">
             <h3>New pass</h3>
             <span class="text-danger">{{ errors | raw }}</span>
             <label>Mot de passe

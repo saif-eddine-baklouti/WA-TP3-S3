@@ -17,7 +17,7 @@
             {% endfor %}
         </table>
         <br><br>
-        <a href="{{path}}user/create" class="btn">Ajouter</a>
+
     </div>
     
 </body>

@@ -6,7 +6,7 @@ RequirePage::library('Validation');
 
 class ControllerUser extends controller {
 
-    public function __construct(){
+    public function __constructor(){
         CheckSession::sessionAuth();
         if($_SESSION['privilege'] != 1) {
             RequirePage::url('login');
@@ -21,34 +21,34 @@ class ControllerUser extends controller {
         $privilege = new Privilege;
         $i=0;
         foreach($select as $user){
-             $selectId = $privilege->selectId($user['privilege_id']);
-             $select[$i]['privilege']= $selectId['privilege'];
-             $i++;
+            $selectId = $privilege->selectId($user['privilege_id']);
+            $select[$i]['privilege']= $selectId['privilege'];
+            $i++;
         }
-        return Twig::render('user/index.php', ['users'=>$select]);
+        return Twig::render('/user/index.php', ['users'=>$select]);
     }
 
     public function create(){ 
             $privilege = new Privilege;
             $select = $privilege->select('privilege');
-            return Twig::render('user/create.php', ['privileges' => $select]);
+            return Twig::render('/user/create.php', ['privileges' => $select]);
     }
 
     public function store(){
         $validation = new Validation;
         extract($_POST);
-        $validation->name('utilisateur')->value($username)->max(50)->required()->pattern('email');
+        $validation->name('utilisateur')->value($username)->max(50)->required();
         $validation->name('mot de passe')->value($password)->max(20)->min(6);
         $validation->name('privilege')->value($privilege_id)->required();
 
         if(!$validation->isSuccess()){
-            // var_dump($validation->getErrors());
+
             $errors =  $validation->displayErrors();
-            //echo $errors;
             $privilege = new Privilege;
             $select = $privilege->select('privilege');
-         return Twig::render('user/create.php', ['errors' =>$errors, 'privileges' => $select, 'user' => $_POST]);
-         exit();
+
+            return Twig::render('/user/create.php', ['errors' =>$errors, 'privileges' => $select, 'user' => $_POST]);
+                exit();
         }
 
         $user = new user;
@@ -56,13 +56,13 @@ class ControllerUser extends controller {
         $options = [
             'cost' => 10
         ];
-        $salt = "H3@_l?a";
+        $salt = "@Z__9U__8n1_A6Z#@__H";
         $passwordSalt = $_POST['password'].$salt;
         $_POST['password'] =  password_hash($passwordSalt, PASSWORD_BCRYPT, $options);
         
         $insert = $user->insert($_POST);
 
-        RequirePage::url('user');
+        RequirePage::url('/user');
     }
 
 

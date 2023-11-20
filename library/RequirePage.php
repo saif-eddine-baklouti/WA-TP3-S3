@@ -6,7 +6,6 @@ class RequirePage {
         return require_once('controller/'.$controller.'.php');
     }
 
-
     static public function model($model){
         return require_once('model/'.$model.'.php');
     }

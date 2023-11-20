@@ -1,3 +1,11 @@
 https://e2395393.webdev.cmaisonneuve.qc.ca/WA-TP3-S3/
 
 https://github.com/saif-eddine-baklouti/WA-TP3-S3.git
+
+
+username Administrateur : a2395393 
+mot de passe :  123456
+
+
+username Etudiant : e2395393 
+mot de passe :  123456

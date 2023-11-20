@@ -3,6 +3,12 @@
 RequirePage::model('CRUD');
 RequirePage::model('User');
 RequirePage::library('Validation');
+RequirePage::library('Mail');
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
 
 class ControllerLogin extends controller {
 
@@ -13,13 +19,13 @@ class ControllerLogin extends controller {
     public function auth(){
         $validation = new Validation;
         extract($_POST);
-        $validation->name('utilisateur')->value($username)->max(50)->required()->pattern('email');
-        $validation->name('mot de passe')->value($password)->max(20)->min(6);
+        $validation->name('utilisateur')->value($username)->max(50)->required();
+        $validation->name('mot de passe')->value($password)->max(20)->min(5);
 
         if(!$validation->isSuccess()){
             $errors =  $validation->displayErrors();
-         return Twig::render('auth/index.php', ['errors' =>$errors,  'user' => $_POST]);
-         exit();
+            return Twig::render('auth/index.php', ['errors' =>$errors,  'user' => $_POST]);
+            exit();
         }
 
         $user= new User;
@@ -31,7 +37,7 @@ class ControllerLogin extends controller {
 
     public function logout(){
         session_destroy();
-        RequirePage::url('login');
+        RequirePage::url('/login');
     }
 
     public function forgot(){
@@ -41,28 +47,27 @@ class ControllerLogin extends controller {
     public function tempPass(){
         $validation = new Validation;
         extract($_POST);
-        $validation->name('utilisateur')->value($username)->max(50)->required()->pattern('email');
+        $validation->name('utilisateur')->value($username)->max(50)->required();
     
         if(!$validation->isSuccess()){
             $errors =  $validation->displayErrors();
-         return Twig::render('auth/forgot.php', ['errors' =>$errors,  'user' => $_POST]);
-         exit();
+            return Twig::render('auth/forgot.php', ['errors' =>$errors,  'user' => $_POST]);
+            exit();
         }
 
         $user = new user;
         $checkUser = $user->checkUser($_POST['username']);
-        
-//        print_r( $checkUser);
 
-        return Twig::render('auth/forgot.php', ['errors' =>$checkUser,  'user' => $_POST]);
+        $phpmailer = new Mail("nomEcole","saif.eddine.baklouti@gmail.com","") ;
+
+        $phpmailer->sendMail($emailPass,"nouveau mot de passe",$checkUser);
+
+        return Twig::render('auth/email.php', [  'user' => $_POST]);
         die();
 
     }
 
     public function newPassword(){
-
-        //print_r($_GET);
-        //die();
 
         $user = new User;
         $check = $user->checkTempPassword($_GET['user'], $_GET['temp']);
@@ -74,20 +79,19 @@ class ControllerLogin extends controller {
     }
 
     public function newPasswordUpdate(){
-       // print_r($_POST);
 
-       $validation = new Validation;
-       extract($_POST);
-       $validation->name('mot de passe')->value($password)->max(20)->min(6);
-   
-       if(!$validation->isSuccess()){
-           $errors =  $validation->displayErrors();
+        $validation = new Validation;
+        extract($_POST);
+        $validation->name('mot de passe')->value($password)->max(20)->min(6);
+        
+        if(!$validation->isSuccess()){
+            $errors =  $validation->displayErrors();
         return Twig::render('auth/new-password.php', ['errors' =>$errors, 'id' => $_POST['id']]);
-        exit();
-       }
+            exit();
+
+        }
 
             $user = new User;
-            
             $_POST['tempPassword'] = null;
             $options = [
                 'cost' => 10
@@ -95,9 +99,9 @@ class ControllerLogin extends controller {
             $salt = "H3@_l?a";
             $passwordSalt = $_POST['password'].$salt;
             $_POST['password'] =  password_hash($passwordSalt, PASSWORD_BCRYPT, $options);
-           
+            
             $user->update($_POST);
-            RequirePage::url('login');
+            RequirePage::url('/login');
     }
 }
 
